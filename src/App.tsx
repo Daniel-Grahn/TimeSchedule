@@ -48,33 +48,37 @@ const App = () => {
     return professions;
   }, [persons]);
 
+  const filterAndSortedPerson = useMemo(() => {
+    return persons
+      .filter((person) => {
+        if (filter.size === 0) return true;
+
+        return person.professions.some((prof) => filter.has(prof));
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+  }, [filter, persons]);
+
   return (
     <>
       <div>
         <header></header>
         <nav></nav>
 
-        <div>
+        <div style={{display:"flex", justifyContent:"space-evenly"}}>
           <aside>
-
-            
             <CheckboxsFilter
               chekboxList={getCurrentProfessions}
               onFilter={handelFilter}
               filter={filter}
             />
             <InformationLable header={"Ledgend"} colorMap={statusColorMap} />
-            <InformationLable header={"persante"} colorMap={percentageColorMap} />
-            
+            <InformationLable
+              header={"persante"}
+              colorMap={percentageColorMap}
+            />
           </aside>
           <main>
-            {persons
-              .filter((person) => {
-                if (filter.size === 0) return true;
-
-                return person.professions.some((prof) => filter.has(prof));
-              })
-              .sort((a, b) => a.name.localeCompare(b.name))
+            {filterAndSortedPerson
               .map((person) => (
                 <div key={person.name}>
                   {person.name} - {person.professions.toString()}{" "}
