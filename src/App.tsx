@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import CheckboxsFilter from "./components/CheckboxsFilter";
 import { getPercentageColorMap, getStatusColorMap } from "./helpers/helper";
 import InformationLable from "./components/InformationLable";
+import PersonTable from "./components/PersonTable";
 
 const App = () => {
   const [persons, setPersons] = useState<Person[]>([]);
@@ -64,7 +65,7 @@ const App = () => {
         <header></header>
         <nav></nav>
 
-        <div style={{display:"flex", justifyContent:"space-evenly"}}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <aside>
             <CheckboxsFilter
               chekboxList={getCurrentProfessions}
@@ -72,19 +73,18 @@ const App = () => {
               filter={filter}
             />
             <InformationLable header={"Ledgend"} colorMap={statusColorMap} />
+
             <InformationLable
               header={"persante"}
               colorMap={percentageColorMap}
             />
           </aside>
+
           <main>
-            {filterAndSortedPerson
-              .map((person) => (
-                <div key={person.name}>
-                  {person.name} - {person.professions.toString()}{" "}
-                </div>
-              ))}
+            <PersonTable persons={filterAndSortedPerson}></PersonTable>
           </main>
+
+          <aside></aside>
         </div>
 
         <footer></footer>
