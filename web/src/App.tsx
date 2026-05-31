@@ -1,15 +1,22 @@
 // import './App.css'
-import type { Person } from "./types/type";
-import { getBookings } from "./service/bookings";
 import { useEffect, useMemo, useState } from "react";
 import CheckboxsFilter from "./components/CheckboxsFilter";
 import { getPercentageColorMap, getStatusColorMap } from "./helpers/helper";
 import InformationLable from "./components/InformationLable";
-import PersonTable from "./components/PersonTable";
+import {employeeApi} from "./service/employee.ts";
+import type {Employee} from "./types/type.ts";
+import EmployeeTable from "./components/EmployeeTable.tsx";
 
 const App = () => {
-  const [persons, setPersons] = useState<Person[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [filter, setFilter] = useState<Set<string>>(new Set());
+
+  const statusColorMap = getStatusColorMap;
+  const percentageColorMap = getPercentageColorMap;
+
+  useEffect(() => {
+    employeeApi.getAll().then(setEmployees);
+  }, []);
 
   const handelFilter = (name: string, value: boolean) => {
     setFilter((prev) => {
@@ -25,39 +32,27 @@ const App = () => {
     });
   };
 
-  const statusColorMap = getStatusColorMap;
-  const percentageColorMap = getPercentageColorMap;
-
-  useEffect(() => {
-    const loadBookings = async () => {
-      const data = await getBookings();
-      console.log("data: ", data);
-      setPersons(data);
-    };
-    loadBookings();
-  }, []);
-
   const getCurrentProfessions = useMemo(() => {
     const professions = new Set<string>();
 
-    persons.forEach((person) => {
-      person.professions.forEach((profession) => {
+    employees.forEach((employee) => {
+      employee.professions.forEach((profession) => {
         professions.add(profession);
       });
     });
 
     return professions;
-  }, [persons]);
+  }, [employees]);
 
   const filterAndSortedPerson = useMemo(() => {
-    return persons
-      .filter((person) => {
+    return employees
+      .filter((employee) => {
         if (filter.size === 0) return true;
 
-        return person.professions.some((prof) => filter.has(prof));
+        return employee.professions.some((prof) => filter.has(prof));
       })
       .sort((a, b) => a.name.localeCompare(b.name));
-  }, [filter, persons]);
+  }, [filter, employees]);
 
   return (
     <>
@@ -81,7 +76,7 @@ const App = () => {
           </aside>
 
           <main>
-            <PersonTable persons={filterAndSortedPerson}></PersonTable>
+            <EmployeeTable employees={filterAndSortedPerson}></EmployeeTable>
           </main>
 
           <aside></aside>
