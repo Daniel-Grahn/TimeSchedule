@@ -3,6 +3,7 @@ package com.worksync.feature.employee;
 import java.util.List;
 
 import com.worksync.feature.booking.Booking;
+import com.worksync.feature.booking.BookingDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,21 +18,20 @@ public class EmployeeDto {
     @NotNull
     private String phoneNumber;
     private List<ProfessionType> professions;
-    private List<Booking> bookings;
+    private List<BookingDto> bookings;
 
     public EmployeeDto(Employee employee) {
         this.id = employee.getId();
         this.name = employee.getName();
         this.phoneNumber = employee.getPhoneNumber();
         this.professions = employee.getProfessions();
-        this.bookings = employee.getBookingsList();
+        this.bookings = employee.getBookingsList().stream().map(BookingDto::new).toList();
     }
 
     public Employee toEntity(Employee employee) {
         employee.setName(name);
         employee.setPhoneNumber(phoneNumber);
         employee.setProfessions(professions);
-        employee.setBookingsList(bookings);
         return employee;
     }
 }

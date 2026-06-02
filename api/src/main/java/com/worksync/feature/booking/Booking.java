@@ -14,11 +14,12 @@ public class Booking {
     private Long id;
     private String activity;
     private String workplace;
-    private int procentage;
+    private int percentage;
     private StatusType status;
     private LocalDate startDate;
     private LocalDate endDate;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 }
