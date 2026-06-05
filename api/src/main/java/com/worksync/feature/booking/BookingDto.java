@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BookingDto {
     private Long id;
-    private String activity;
+    private ActivityType activity;
     private String workplace;
     private int percentage;
     private StatusType status;

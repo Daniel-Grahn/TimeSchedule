@@ -63,3 +63,22 @@ INSERT INTO employee_professions
 (27, 'CARPENTER'),
 (27, 'MASON'),
 (28, 'ELECTRICIAN');
+
+
+
+INSERT INTO booking
+(activity, workplace, percentage, status, start_date, end_date, employee_id) VALUES
+('CARPENTER', 'Mölndal stad', 50, 'PRELIMINARY', '2026-05-29', '2026-06-01', 1),
+('OTHER', null, 100, 'ABSENT', '2026-06-02', '2026-06-04', 1),
+('CARPENTER', 'Mölndal stad', 100, 'PRELIMINARY', '2026-06-06', '2026-06-09', 1),
+('CARPENTER', 'AstraZeneca', 50, 'PRELIMINARY', '2026-06-10', '2026-06-15', 1),
+('CARPENTER', 'AstraZeneca', 50, 'BOOKED', '2026-06-10', '2026-06-15', 1),
+('CARPENTER', 'Kungsbacka Komun', 50,'PRELIMINARY','2026-06-16','2026-06-18', 1),
+('CARPENTER', 'Arvid Johansson', 50, 'PRELIMINARY', '2026-06-16', '2026-06-25', 1),
+('CARPENTER', 'Jan Bert', 100, 'PRELIMINARY','2026-06-28','2026-07-06',1),
+('OTHER', null, 100, 'ABSENT','2026-05-21', '2026-06-01', 2),
+('PAINTER', 'Hotel Mölndals Bro',100, 'BOOKED','2026-06-02','2026-06-11', 2),
+('PAINTER','Hotel Mölndals Bro',100, 'BOOKED','2026-06-12','2026-06-15', 2),
+('PAINTER', 'Café Vägen', 100, 'PRELIMINARY','2026-06-16','2026-06-19', 2),
+('PAINTER', 'Green Storage', 100, 'BOOKED','2026-06-22','2026-06-29', 2),
+('OTHER', null, 100, 'ABSENT','2026-06-30','2026-07-10',2);
