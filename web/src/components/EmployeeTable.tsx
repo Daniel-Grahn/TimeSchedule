@@ -1,11 +1,11 @@
 import { getStatusColorMap } from "../helpers/helper";
-import type { Booking, Person } from "../types/type";
+import type { Booking, Employee } from "../types/type";
 
 interface Props {
-  persons: Person[];
+  employees: Employee[];
 }
 
-const PersonTable = ({ persons }: Props) => {
+const EmployeeTable = ({ employees }: Props) => {
   const startDate = new Date("2026-05-25");
   const endDate = new Date("2026-05-29");
 
@@ -32,21 +32,30 @@ const PersonTable = ({ persons }: Props) => {
     return statusList;
   };
 
+  function formatEnum(value: string): string {
+    return value
+        .toLowerCase()
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+  }
+
   return (
     <>
-      {persons.map((person) => (
+      {employees.map((employee) => (
         <div
-          key={person.name}
+          key={employee.id}
           style={{ display: "flex", justifyContent: "space-between" }}
         >
           <div>
-            <div>{person.name}</div>
-            <div>{person.professions.toString()}</div>
+            <div>{employee.name}</div>
+            <div>{employee.professions.map((profession) => (
+                formatEnum(profession)
+            ))}</div>
           </div>
 
           <div style={{ display: "flex" }}>
-            {statusOverWeek(person.bookings).map((status) => (
-              <InformationBox status={status} />
+            {statusOverWeek(employee.bookings).map((status) => (
+              <InformationBox  status={status} />
             ))}
           </div>
         </div>
@@ -76,4 +85,4 @@ const InformationBox = ({ status }: InformationBoxProps) => {
   );
 };
 
-export default PersonTable;
+export default EmployeeTable;
