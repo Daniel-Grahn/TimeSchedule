@@ -37,7 +37,7 @@ const App = () => {
 
     employees.forEach((employee) => {
       employee.professions.forEach((profession) => {
-        professions.add(profession);
+        professions.add(profession.toLowerCase());
       });
     });
 
