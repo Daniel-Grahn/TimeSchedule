@@ -1,4 +1,4 @@
-import { getStatusColorMap } from "../helpers/helper";
+import { formatEnum, getStatusColorMap } from "../helpers/helper";
 import type { Booking, Employee } from "../types/type";
 
 interface Props {
@@ -31,13 +31,6 @@ const EmployeeTable = ({ employees }: Props) => {
 
     return statusList;
   };
-
-  function formatEnum(value: string): string {
-    return value
-        .toLowerCase()
-        .replace(/_/g, " ")
-        .replace(/\b\w/g, (char) => char.toUpperCase());
-  }
 
   return (
     <>

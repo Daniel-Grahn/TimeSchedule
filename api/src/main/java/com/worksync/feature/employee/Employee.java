@@ -4,6 +4,7 @@ import com.worksync.feature.booking.Booking;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,6 @@ public class Employee {
     private List<ProfessionType> professions;
 
     @OneToMany(mappedBy = "employee")
-    private List<Booking> bookingsList;
+    private List<Booking> bookingsList = new ArrayList<>();
 
 }

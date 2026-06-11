@@ -6,6 +6,7 @@ import InformationLable from "./components/InformationLable";
 import {employeeApi} from "./service/employee.ts";
 import type {Employee} from "./types/type.ts";
 import EmployeeTable from "./components/EmployeeTable.tsx";
+import CreateEmployee from "./components/CreateEmployee.tsx";
 
 const App = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -37,7 +38,7 @@ const App = () => {
 
     employees.forEach((employee) => {
       employee.professions.forEach((profession) => {
-        professions.add(profession.toLowerCase());
+        professions.add(profession);
       });
     });
 
@@ -76,6 +77,7 @@ const App = () => {
           </aside>
 
           <main>
+            <CreateEmployee></CreateEmployee>
             <EmployeeTable employees={filterAndSortedPerson}></EmployeeTable>
           </main>
 

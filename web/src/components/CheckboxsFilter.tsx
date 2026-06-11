@@ -1,3 +1,5 @@
+import { formatEnum } from "../helpers/helper";
+
 interface Props {
   chekboxList: Set<string>;
   onFilter: (name: string, value: boolean) => void;
@@ -35,7 +37,7 @@ const CheckboxsFilter = ({ chekboxList, onFilter, filter }: Props) => {
                 onFilter(item, e.currentTarget.checked);
               }}
             />
-            {item}
+            {formatEnum(item)}
           </label>
         ))}
       </div>
